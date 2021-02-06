@@ -1,5 +1,6 @@
 
-
+const express = require('express')
+const app = express()
 const Queue = require("bee-queue");
 
 const queueConfig = require("./queue");
@@ -155,3 +156,8 @@ new_gft_loss_benechng.process(function (job, done) {
 
 
 
+
+
+app.listen(process.env.PORT || 3007, () => {
+    console.log(`Example app listening at http://localhost:${port}`)
+})
