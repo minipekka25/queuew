@@ -159,5 +159,5 @@ new_gft_loss_benechng.process(function (job, done) {
 
 
 app.listen(process.env.PORT || 3007, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${process.env.PORT || 3007}`)
 })
