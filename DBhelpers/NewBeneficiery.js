@@ -24,7 +24,7 @@ const slotholder = mxdb.model("slotholder", slotholderSchema);
 const price = [0.025, 0.05, 0.075, 0.1, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0];
 
 exports.NewBeneficiery = async (data) => {
-let id= Number(data.returnValues.id)
+let id= Number(data.returnValues.userId)
 let founduser = await user.findOne({id:id})
 
 founduser.beneficiery = data.returnValues.newaddress
