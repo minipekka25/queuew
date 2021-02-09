@@ -79,12 +79,7 @@ exports.NewPlace = async (data) =>{
         }
     }
 
-  
-
-    runSlot= async (respdata)=>{
-        try {
-            
-              let newSlotTxn = new slottxn({
+   let newSlotTxn = new slottxn({
         transactionId: data.transactionHash,
         useraddress: data.returnValues.referrer,
         referreraddress:data.returnValues.user ,
@@ -96,6 +91,11 @@ exports.NewPlace = async (data) =>{
         matrix: data.returnValues.matrix,
         txntype: txntype,
     });
+
+    runSlot= async (respdata)=>{
+        try {
+            
+             
             let createdSltTxn = await newSlotTxn.save();
 
             let slothold = await slotholder.findOne({ user: data.returnValues.referrer, matrix: data.returnValues.matrix, level: data.returnValues.level, reinvest: data.returnValues.count })
