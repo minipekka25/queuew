@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const Queue = require("bee-queue");
 
-// const queueConfig = require("./queue");
+const queueConfig = require("./queue");
 
 app.use(function (req, res, next) {
 
