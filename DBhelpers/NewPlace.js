@@ -107,7 +107,7 @@ exports.NewPlace = async (data) =>{
                 try {
                     slotplace = await slothold.save()
                 } catch (e) {
-                    console.log(e)
+                    console.log(e + "firtst block")
                 }
             } else {
                 let newslotholder = new slotholder({
@@ -120,7 +120,7 @@ exports.NewPlace = async (data) =>{
                 try {
                     slotplace = await newslotholder.save()
                 } catch (e) {
-                    console.log(e)
+                    console.log(e+ "second block")
                 }
             }
 
