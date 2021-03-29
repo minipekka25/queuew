@@ -36,8 +36,9 @@ exports.NewPlace = async (data) =>{
         .populate({ path: "x6Matrix", model: x6matrix }).exec((e, response)=> {if (e){
             console.log(e)
         }else{
-            console.log('new place' + data.returnValues.place, data.returnValues.matrix)
+         
             runSlot(response)
+            console.log('new place' + data.returnValues.place)
 
         }})
     
@@ -79,23 +80,23 @@ exports.NewPlace = async (data) =>{
         }
     }
 
-   let newSlotTxn = new slottxn({
-        transactionId: data.transactionHash,
-        useraddress: data.returnValues.referrer,
-        referreraddress:data.returnValues.user ,
-        referrerid: Number(data.returnValues.id),
-        value: price[Number(data.returnValues.level) - 1],
-        level: Number(data.returnValues.level),
-        reinvest: Number(data.returnValues.count),
-        place: Number(data.returnValues.place),
-        matrix: data.returnValues.matrix,
-        txntype: txntype,
-    });
+    
 
     runSlot= async (respdata)=>{
         try {
+            let newSlotTxn = new slottxn({
+                transactionId: data.transactionHash,
+                useraddress: data.returnValues.referrer,
+                referreraddress: data.returnValues.user,
+                referrerid: Number(data.returnValues.id),
+                value: price[Number(data.returnValues.level) - 1],
+                level: Number(data.returnValues.level),
+                reinvest: Number(data.returnValues.count),
+                place: Number(data.returnValues.place),
+                matrix: data.returnValues.matrix,
+                txntype: txntype,
+            });
             
-             
             let createdSltTxn = await newSlotTxn.save();
 
             let slothold = await slotholder.findOne({ user: data.returnValues.referrer, matrix: data.returnValues.matrix, level: data.returnValues.level, reinvest: data.returnValues.count })
@@ -107,7 +108,7 @@ exports.NewPlace = async (data) =>{
                 try {
                     slotplace = await slothold.save()
                 } catch (e) {
-                    console.log(e + "firtst block")
+                    console.log(e)
                 }
             } else {
                 let newslotholder = new slotholder({
@@ -120,7 +121,7 @@ exports.NewPlace = async (data) =>{
                 try {
                     slotplace = await newslotholder.save()
                 } catch (e) {
-                    console.log(e+ "second block")
+                    console.log(e)
                 }
             }
 
